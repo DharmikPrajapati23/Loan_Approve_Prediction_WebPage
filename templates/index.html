@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Basic Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans Condensed', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Dotted Background Styling */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#999 1px, transparent 1px);
+            background-size: 20px 20px; /* Adjust dot spacing */
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, white, rgb(165, 189, 224));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            color: #000; /* Change text color to black */
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #000; /* Change title color to black */
+        }
+        .form-group {
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .form-group label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            display: block;
+            color: #000; /* Change label color to black */
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #000; /* Change border color to black */
+            outline: none;
+            font-size: 1em;
+            color: #000; /* Change text color inside input/select to black */
+        }
+        .form-group:hover {
+            transform: scale(1.02);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px; /* Increased padding for bigger button size */
+            background: #5e509e; /* Green background for the button */
+            color: white; /* White text color */
+            font-size: 1.2em; /* Increased font size for better visibility */
+            font-weight: bold;
+            border: none;
+            border-radius: 8px; /* Slightly rounded corners */
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #1c1277; /* Darker green shade on hover */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+        .container p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2em; /* Default font size for the entire paragraph */
+            color: #5e509e; /* Default text color */
+        }
+
+        /* Style for the first line of the paragraph */
+        .container p::first-line {
+            font-size: 1.5em; /* Larger font size for the first line */
+            font-weight: bold; /* Optional: Makes the first line bold */
+            color: #140d52; /* Optional: Different color for the first line */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-calculator"></i> Loan Approval Prediction</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="form-group">
+                <label for="applicant_age">Applicant Age</label>
+                <input type="number" name="person_age" id="person_age" required>
+            </div>
+            <div class="form-group">
+                <label for="annual_income">Annual Income (Monetary Units)</label>
+                <input type="number" name="person_income" id="person_income" required>
+            </div>
+            <div class="form-group">
+                <label for="employment_years">Employment Length (Years)</label>
+                <input type="number" step="0.1" name="person_emp_length" id="person_emp_length" required>
+            </div>
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount Requested</label>
+                <input type="number" name="loan_amnt" id="loan_amnt" required>
+            </div>
+            <div class="form-group">
+                <label for="interest_rate">Loan Interest Rate (%)</label>
+                <input type="number" step="0.01" name="loan_int_rate" id="loan_int_rate" required>
+            </div>
+            <div class="form-group">
+                <label for="income_percent_loan">Loan Repayment as % of Income</label>
+                <input type="number" step="0.01" name="loan_percent_income" id="loan_percent_income" required>
+            </div>
+            <div class="form-group">
+                <label for="credit_history_years">Credit History Length (Years)</label>
+                <input type="number" name="cb_person_cred_hist_length" id="cb_person_cred_hist_length" required>
+            </div>
+            <div class="form-group">
+                <label for="home_ownership">Home Ownership Status</label>
+                <select name="person_home_ownership" id="person_home_ownership" required>
+                    <option value="RENT">Rent</option>
+                    <option value="OWN">Own</option>
+                    <option value="MORTGAGE">Mortgage</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="credit_grade">Loan Credit Grade</label>
+                <select name="loan_grade" id="loan_grade" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="credit_default">Credit Default History</label>
+                <select name="cb_person_default_on_file" id="cb_person_default_on_file" required>
+                    <option value="N">No</option>
+                    <option value="Y">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="loan_intent">Loan Intent</label>
+                <select name="loan_intent" id="loan_intent" required>
+                    <option value="EDUCATION">Education</option>
+                    <option value="HOMEIMPROVEMENT">Home Improvement</option>
+                    <option value="MEDICAL">Medical</option>
+                    <option value="PERSONAL">Personal</option>
+                    <option value="VENTURE">Venture</option>
+                    <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+        <p>{{ text|safe }}</p>
+    </div>
+</body>
+</html>
