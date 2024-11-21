@@ -1,6 +1,6 @@
 # Loan Approval Prediction Model
 
-This repository contains a machine learning-based web application for predicting **loan approval probabilities**. The project leverages **XGBoost**, a highly efficient gradient boosting algorithm, to predict whether a loan will be approved or not based on several input features. The application is hosted on [Render](https://render.com) for public accessibility.
+This repository contains a machine learning-based web application for predicting **loan approval probabilities**. The project leverages **XGBoost**, a highly efficient gradient boosting algorithm, to predict whether a loan will be approved or not based on several input features. The application is hosted on [Render](https://loan-approve-prediction-by-dharmik.onrender.com) for public accessibility.
 
 ---
 
