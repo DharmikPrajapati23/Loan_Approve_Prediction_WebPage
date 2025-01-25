@@ -101,6 +101,7 @@
             text-align: center;
             margin-top: 15px;
             font-size: 1.2em; /* Default font size for the entire paragraph */
+            font-weight: bold; /* Optional: Makes the text bold */
             color: #5e509e; /* Default text color */
         }
 
@@ -110,6 +111,8 @@
             font-weight: bold; /* Optional: Makes the first line bold */
             color: #140d52; /* Optional: Different color for the first line */
         }
+
+
 
     </style>
 </head>
@@ -136,10 +139,6 @@
             <div class="form-group">
                 <label for="interest_rate">Loan Interest Rate (%)</label>
                 <input type="number" step="0.01" name="loan_int_rate" id="loan_int_rate" required>
-            </div>
-            <div class="form-group">
-                <label for="income_percent_loan">Loan Repayment as % of Income</label>
-                <input type="number" step="0.01" name="loan_percent_income" id="loan_percent_income" required>
             </div>
             <div class="form-group">
                 <label for="credit_history_years">Credit History Length (Years)</label>
