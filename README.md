@@ -16,9 +16,8 @@ The model uses the following features to predict the probability of loan approva
 6. **loan_grade**: Credit grade assigned to the applicant.
 7. **loan_amnt**: Loan amount requested.
 8. **loan_int_rate**: Interest rate of the loan.
-9. **loan_percent_income**: Percentage of income allocated to loan repayment.
-10. **cb_person_default_on_file**: History of default on file (Yes/No).
-11. **cb_person_cred_hist_length**: Length of credit history in years.
+9. **cb_person_default_on_file**: History of default on file (Yes/No).
+10. **cb_person_cred_hist_length**: Length of credit history in years.
 
 ---
 
