@@ -1,6 +1,6 @@
 # Loan Approval Prediction Model
 
-This repository contains a machine learning-based web application for predicting **loan approval probabilities**. The project leverages **XGBoost**, a highly efficient gradient boosting algorithm, to predict whether a loan will be approved or not based on several input features. The application is hosted on [Render](https://loan-approve-prediction-webpage.onrender.com) for public accessibility.
+This repository contains a machine learning-based web application for predicting **loan approval probabilities**. The project leverages **catboost**, a highly efficient gradient boosting algorithm, to predict whether a loan will be approved or not based on several input features. The application is hosted on [Render](https://loan-approve-prediction-webpage.onrender.com) for public accessibility.
 
 ---
 
@@ -31,7 +31,7 @@ The model uses the following features to predict the probability of loan approva
 
 ## Technology Stack
 
-- **Machine Learning Framework**: XGBoost
+- **Machine Learning Framework**: catboost
 - **Web Framework**: Flask
 - **Deployment Platform**: Render
 - **Programming Language**: Python
@@ -44,8 +44,8 @@ The model uses the following features to predict the probability of loan approva
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/loan-approval-prediction.git
-cd loan-approval-prediction
+git clone https://github.com/<your-username>/Loan_Approve_Prediction_WebPage/tree/master
+cd Loan_Approve_Prediction_WebPage
 ```
 ### Install Dependencies
 Use pip to install the required dependencies:
@@ -79,7 +79,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 ### Acknowledgments
-- XGBoost Documentation
+- catboost Documentation
 - Flask Framework
 - Render Deployment
 
